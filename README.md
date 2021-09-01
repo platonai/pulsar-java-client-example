@@ -7,7 +7,7 @@ Submit an X-SQL to scrape:
 
 Check the status of a specified scrape task:
 
-    ScrapeResponse status = driver.findById(ids.iterator().next());
+    ScrapeResponse status = driver.findById(id);
 
 Check our dashboard:
 
