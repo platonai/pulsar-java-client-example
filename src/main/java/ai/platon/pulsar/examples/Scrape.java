@@ -14,12 +14,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * A scrape example to show how to access our services
+ * Send an email to [ivincent.zhang@gmail.com] for the API server and your auth token
+ * */
 public class Scrape {
-    public static void main(String[] args) throws IOException {
-        String server = "master";
-        String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
-        Duration httpTimeout = Duration.ofMinutes(3);
+    // send an email to [ivincent.zhang@gmail.com] for the API server
+    static String server = "master";
+    // send an email to [ivincent.zhang@gmail.com] for the auth token
+    static String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
 
+    public static void main(String[] args) throws IOException {
         List<String> urls = ResourceLoader.INSTANCE.readAllLines("sites/amazon/asin/urls.txt")
                 .stream().limit(10).collect(Collectors.toList());
         String sqlTemplate =
@@ -30,6 +35,8 @@ public class Scrape {
             "   array_join_to_string(dom_all_texts(dom, '#wayfinding-breadcrumbs_container ul li a'), '|') as `categories`,\n" +
             "   dom_base_uri(dom) as `baseUri`\nfrom\n" +
             "   load_and_select('{{url}} -i 1h', ':root')\n";
+
+        Duration httpTimeout = Duration.ofMinutes(3);
 
         try (Driver driver = new Driver(server, authToken, httpTimeout)) {
             Set<String> ids = new HashSet<>();
