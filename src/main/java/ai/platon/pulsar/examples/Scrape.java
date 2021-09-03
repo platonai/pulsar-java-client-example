@@ -16,11 +16,10 @@ import java.util.stream.Collectors;
 
 /**
  * A scrape example to show how to access our services
- * Send an email to [ivincent.zhang@gmail.com] for the API server and your auth token
+ * Send an email to [ivincent.zhang@gmail.com] for your auth token
  * */
 public class Scrape {
-    // send an email to [ivincent.zhang@gmail.com] for the API server
-    static String server = "master";
+    static String server = "platonic.fun";
     // send an email to [ivincent.zhang@gmail.com] for the auth token
     static String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
 
