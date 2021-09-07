@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 
 /**
  * A scrape example to show how to access our services
- * Send an email to [ivincent.zhang@gmail.com] for your auth token
+ * Email to [ivincent.zhang@gmail.com] for your auth token
  * */
 public class Scrape {
     static String server = "platonic.fun";
-    // send an email to [ivincent.zhang@gmail.com] for the auth token
+    // Email to [ivincent.zhang@gmail.com] for the auth token
     static String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
 
     public static void main(String[] args) throws IOException {
@@ -33,7 +33,7 @@ public class Scrape {
             "   dom_first_text(dom, '#price tr td:matches(^Price) ~ td, #price_inside_buybox') as `price`,\n" +
             "   array_join_to_string(dom_all_texts(dom, '#wayfinding-breadcrumbs_container ul li a'), '|') as `categories`,\n" +
             "   dom_base_uri(dom) as `baseUri`\nfrom\n" +
-            "   load_and_select('{{url}} -i 1h', ':root')\n";
+            "   load_and_select('{{url}} -i 7d', ':root')\n";
 
         Duration httpTimeout = Duration.ofMinutes(3);
 
@@ -72,7 +72,7 @@ public class Scrape {
             Dashboard dashboard = driver.dashboard();
             System.out.println(gson.toJson(dashboard));
 
-            // we download all the scrape results
+            // download all the scrape results
             Page<CompactedScrapeResponse> results = driver.download(0, 10);
             System.out.println(gson.toJson(results));
         }
