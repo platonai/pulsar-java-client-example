@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +25,7 @@ public class Scrape {
 
     public static void main(String[] args) throws IOException {
         List<String> urls = ResourceLoader.INSTANCE.readAllLines("sites/amazon/asin/urls.txt")
-                .stream().limit(10).collect(Collectors.toList());
+                .stream().skip(50).limit(10).collect(Collectors.toList());
         String sqlTemplate =
             "select\n" +
             "   dom_first_text(dom, '#productTitle') as `title`,\n" +
@@ -38,20 +38,10 @@ public class Scrape {
         Duration httpTimeout = Duration.ofMinutes(3);
 
         try (Driver driver = new Driver(server, authToken, httpTimeout)) {
-            Set<String> ids = new HashSet<>();
-            for (String url : urls) {
-                String sql = new SQLTemplate(sqlTemplate).createSQL(url);
-                String id = null;
-                try {
-                    id = driver.submit(sql, true);
-                } catch (ScrapeException e) {
-                    e.printStackTrace();
-                }
-                if (id == null) {
-                    break;
-                }
-                ids.add(id);
-            }
+            Set<String> ids = urls.stream().map(url -> new SQLTemplate(sqlTemplate).createSQL(url))
+                    .map(sql -> submit(sql, driver))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
 
             if (ids.isEmpty()) {
                 System.out.println("No id collected");
@@ -76,5 +66,14 @@ public class Scrape {
             Page<CompactedScrapeResponse> results = driver.download(0, 10);
             System.out.println(gson.toJson(results));
         }
+    }
+
+    private static String submit(String sql, Driver driver) {
+        try {
+            return driver.submit(sql, true);
+        } catch (ScrapeException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
