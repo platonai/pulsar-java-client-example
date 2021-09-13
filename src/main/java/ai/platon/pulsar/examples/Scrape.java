@@ -43,20 +43,18 @@ public class Scrape {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
 
-            if (ids.isEmpty()) {
-                System.out.println("No id collected");
-                return;
-            }
-
-            Path path = Files.createTempFile("pulsar-", ".txt");
-            Files.write(path, ids);
-            System.out.println("Ids are written to " + path);
-
             Gson gson = driver.createGson();
+            if (!ids.isEmpty()) {
+                Path path = Files.createTempFile("pulsar-", ".txt");
+                Files.write(path, ids);
+                System.out.println("Ids are written to " + path);
 
-            // we may want to check the status of a scrape task with a specified id
-            ScrapeResponse status = driver.findById(ids.iterator().next());
-            System.out.println(gson.toJson(status));
+                // we may want to check the status of a scrape task with a specified id
+                ScrapeResponse status = driver.findById(ids.iterator().next());
+                System.out.println(gson.toJson(status));
+            } else {
+                System.out.println("No id collected");
+            }
 
             // we may want to check our dashboard
             Dashboard dashboard = driver.dashboard();
