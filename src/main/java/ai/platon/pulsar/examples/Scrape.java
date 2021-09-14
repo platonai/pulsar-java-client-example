@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 public class Scrape {
     static String server = "platonic.fun";
     // Email to [ivincent.zhang@gmail.com] for the auth token
-    static String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
+    static String authToken = "b09chenliangcbc2c24384d16e28fcd46dd07f9dca49";
 
     public static void main(String[] args) throws IOException {
         List<String> urls = ResourceLoader.INSTANCE.readAllLines("sites/amazon/asin/urls.txt")
-                .stream().skip(50).limit(10).collect(Collectors.toList());
+                .stream().skip(1).limit(1).collect(Collectors.toList());
         String sqlTemplate =
             "select\n" +
             "   dom_first_text(dom, '#productTitle') as `title`,\n" +

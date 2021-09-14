@@ -1,0 +1,95 @@
+{
+  "authToken": "b09chenliangcbc2c24384d16e28fcd46dd07f9dca49",
+  "timestamp": "2021-09-14T16:45:53.837953+08:00",
+  "profile": {
+    "balance": 0.0,
+    "visitCounter": {
+      "visitsLastMinute": 10,
+      "visitsLastTenMinutes": 10,
+      "visitsLastHour": 10,
+      "visitsLastDay": 10,
+      "maxVisitsPMinute": 60,
+      "maxVisitsPTenMinutes": 200,
+      "maxVisitsPHour": 300,
+      "maxVisitsPDay": 1000
+    }
+  },
+  "monthlySummary": [
+    {
+      "count": 1011,
+      "pendingCount": 10,
+      "successCount": 969,
+      "finishedCount": 1001,
+      "startTime": "2021-09-01T00:00+08:00",
+      "endTime": "2021-10-01T00:00+08:00"
+    }
+  ],
+  "dailySummary": [
+    {
+      "count": 440,
+      "pendingCount": 0,
+      "successCount": 416,
+      "finishedCount": 440,
+      "startTime": "2021-09-13T00:00+08:00",
+      "endTime": "2021-09-14T00:00+08:00"
+    },
+    {
+      "count": 571,
+      "pendingCount": 10,
+      "successCount": 553,
+      "finishedCount": 561,
+      "startTime": "2021-09-14T00:00+08:00",
+      "endTime": "2021-09-15T00:00+08:00"
+    }
+  ],
+  "hourlySummary": [
+    {
+      "count": 10,
+      "pendingCount": 0,
+      "successCount": 10,
+      "finishedCount": 10,
+      "startTime": "2021-09-14T08:00+08:00",
+      "endTime": "2021-09-14T09:00+08:00"
+    },
+    {
+      "count": 71,
+      "pendingCount": 1,
+      "successCount": 64,
+      "finishedCount": 70,
+      "startTime": "2021-09-14T09:00+08:00",
+      "endTime": "2021-09-14T10:00+08:00"
+    },
+    {
+      "count": 221,
+      "pendingCount": 0,
+      "successCount": 221,
+      "finishedCount": 221,
+      "startTime": "2021-09-14T10:00+08:00",
+      "endTime": "2021-09-14T11:00+08:00"
+    },
+    {
+      "count": 70,
+      "pendingCount": 0,
+      "successCount": 70,
+      "finishedCount": 70,
+      "startTime": "2021-09-14T13:00+08:00",
+      "endTime": "2021-09-14T14:00+08:00"
+    },
+    {
+      "count": 190,
+      "pendingCount": 0,
+      "successCount": 188,
+      "finishedCount": 190,
+      "startTime": "2021-09-14T14:00+08:00",
+      "endTime": "2021-09-14T15:00+08:00"
+    },
+    {
+      "count": 10,
+      "pendingCount": 10,
+      "successCount": 0,
+      "finishedCount": 0,
+      "startTime": "2021-09-14T16:00+08:00",
+      "endTime": "2021-09-14T17:00+08:00"
+    }
+  ]
+}

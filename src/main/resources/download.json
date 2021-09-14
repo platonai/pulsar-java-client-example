@@ -1,0 +1,191 @@
+{
+  "number": 0,
+  "size": 10,
+  "totalPages": 101,
+  "totalElements": 1003,
+  "numberOfElements": 10,
+  "first": true,
+  "last": false,
+  "content": [
+    {
+      "id": "614060cb572e885322d4b7b1",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 901919,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B07R9GN2JD",
+      "resultSet": [
+        {
+          "title": "Columbia Men\u0027s Tall Big Dippers Water Short",
+          "listprice": "",
+          "price": "$34.62 - $38.67",
+          "categories": "Clothing, Shoes \u0026 Jewelry|Men|Clothing|Active|Active Shorts",
+          "baseuri": "https://www.amazon.com/dp/B07R9GN2JD"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060cb572e885322d4b7b0",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 842928,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B002NAFOII",
+      "resultSet": [
+        {
+          "title": "NFL Fleece Dallas Cowboys Toss Blue/White, Fabric by the Yard",
+          "listprice": "",
+          "price": "",
+          "categories": "Sports \u0026 Outdoors|Fan Shop|Fabric",
+          "baseuri": "https://www.amazon.com/dp/B002NAFOII"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060cb572e885322d4b7af",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 1251777,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B07GJ3HKX5",
+      "resultSet": [
+        {
+          "title": "PH PandaHall 5 Pack 10 Grids Rectangle Plastic Bead Storage Box Case Container Jewelry Organizer with Movable Dividers for Small Earring Jewelry Craft Sewing Supplies, 2.6x5x0.8inch",
+          "listprice": "",
+          "price": "$10.49",
+          "categories": "Arts, Crafts \u0026 Sewing|Organization, Storage \u0026 Transport|Craft \u0026 Sewing Supplies Storage",
+          "baseuri": "https://www.amazon.com/dp/B07GJ3HKX5"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060cb572e885322d4b7ae",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 1930463,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B093SZTW1R",
+      "resultSet": [
+        {
+          "title": "CHEAVIAN 60PCS 6mm Natural African Jade Gemstone Round Loose Beads for Jewelry Making DIY Findings 1 Strand 15\"",
+          "listprice": "",
+          "price": "$9.59",
+          "categories": "Arts, Crafts \u0026 Sewing|Beading \u0026 Jewelry Making|Beads \u0026 Bead Assortments",
+          "baseuri": "https://www.amazon.com/dp/B093SZTW1R"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060cb572e885322d4b7ad",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 1084215,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B00WUPUYCC",
+      "resultSet": [
+        {
+          "title": "Nature\u0027s Oil (USP Grade-Kosher) Vegetable Glycerin 100% Pure (10 lbs) Gallon",
+          "listprice": "",
+          "price": "$25.00",
+          "categories": "Arts, Crafts \u0026 Sewing|Crafting|Candle Making|Wax",
+          "baseuri": "https://www.amazon.com/dp/B00WUPUYCC"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060ca572e885322d4b7ac",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 810810,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B000HJEI7A",
+      "resultSet": [
+        {
+          "title": "24 In. Gas Single Wall Oven – White",
+          "listprice": "",
+          "price": "",
+          "categories": "Appliances|Ranges, Ovens \u0026 Cooktops|Wall Ovens|Combination Microwave \u0026 Wall Ovens",
+          "baseuri": "https://www.amazon.com/dp/B000HJEI7A"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060ca572e885322d4b7ab",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 843264,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B07RVDBBHL",
+      "resultSet": [
+        {
+          "title": "Ketone Keto Urinal Test Strips, 150 Strips - Perfect for Ketogenic, Low Carb, Atkins \u0026 Paleo Diets, and Ketogenic Measurement, Accurate Result in 15 Seconds,",
+          "listprice": "",
+          "price": "",
+          "categories": "Health \u0026 Household|Health Care|Diabetes Care|Test Strips|Urinalysis Strips",
+          "baseuri": "https://www.amazon.com/dp/B07RVDBBHL"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060ca572e885322d4b7aa",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 929989,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B01BV2Y07Y",
+      "resultSet": [
+        {
+          "title": "iYunyi Men\u0027s Slimming Body Shaper Tank Top Front Zipper Corset Vest",
+          "listprice": "",
+          "price": "$14.99 - $31.99",
+          "categories": "Clothing, Shoes \u0026 Jewelry|Men|Clothing|Underwear|Shapewear",
+          "baseuri": "https://www.amazon.com/dp/B01BV2Y07Y"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060ca572e885322d4b7a9",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 719520,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B075NLYH3H",
+      "resultSet": [
+        {
+          "title": "Alexandrite Oval ring, stackable ring, Vermeil Gold or silver, bezel set ring, oval ring, Lavender gemstone ring, JuneBirthstone ring, Birthstone gift",
+          "listprice": "",
+          "price": "$51.00",
+          "categories": "Handmade Products|Jewelry|Rings|Stacking",
+          "baseuri": "https://www.amazon.com/dp/B075NLYH3H"
+        }
+      ],
+      "collectionId": 0
+    },
+    {
+      "id": "614060ca572e885322d4b7a8",
+      "statusCode": 200,
+      "pageStatusCode": 200,
+      "pageContentBytes": 912314,
+      "isDone": true,
+      "url": "https://www.amazon.com/dp/B09166MG9C",
+      "resultSet": [
+        {
+          "title": "TEHAUX Kids Watches,Children Cartoon Watches Luminous Quartz Watches Cute Cat Pattern Casual Leather Watches for Ladies Fashion Women Gift",
+          "listprice": "",
+          "price": "",
+          "categories": "Sports \u0026 Outdoors|Fan Shop|Jewelry \u0026 Watches|Watches",
+          "baseuri": "https://www.amazon.com/dp/B09166MG9C"
+        }
+      ],
+      "collectionId": 0
+    }
+  ]
+}
