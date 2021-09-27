@@ -2,6 +2,7 @@
 -- noinspection SqlResolveForFile
 -- noinspection SqlNoDataSourceInspectionForFile
 
+-- extract fields from product pages, example url: https://www.amazon.com/dp/B015GM4H8W
 select
     dom_uri(dom) as `url`,
     dom_base_uri(dom) as `baseUri`,

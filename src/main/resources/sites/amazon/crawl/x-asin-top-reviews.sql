@@ -1,6 +1,7 @@
 -- noinspection SqlResolveForFile
 -- noinspection SqlNoDataSourceInspectionForFile
 
+-- extract top reviews from product pages, example url: https://www.amazon.com/dp/B015GM4H8W
 select
     dom_base_uri(dom) as `url`,
     amazon_find_asin(dom_base_uri(dom)) as asin,
