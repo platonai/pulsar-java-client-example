@@ -25,7 +25,7 @@ public class Scrape {
 
     public static void main(String[] args) throws IOException {
         List<String> urls = ResourceLoader.INSTANCE.readAllLines("sites/amazon/asin/urls.txt")
-                .stream().skip(1).limit(1).collect(Collectors.toList());
+                .stream().skip(1).limit(5).collect(Collectors.toList());
         String sqlTemplate =
             "select\n" +
             "   dom_first_text(dom, '#productTitle') as `title`,\n" +
@@ -49,18 +49,18 @@ public class Scrape {
                 Files.write(path, ids);
                 System.out.println("Ids are written to " + path);
 
-                // we may want to check the status of a scrape task with a specified id
+                // 1. we may want to check the status of a scrape task with a specified id
                 ScrapeResponse status = driver.findById(ids.iterator().next());
                 System.out.println(gson.toJson(status));
             } else {
                 System.out.println("No id collected");
             }
 
-            // we may want to check our dashboard
+            // 2. we may want to check our dashboard
             Dashboard dashboard = driver.dashboard();
             System.out.println(gson.toJson(dashboard));
 
-            // download all the scrape results
+            // 3. download all the scrape results
             Page<CompactedScrapeResponse> results = driver.download(0, 10);
             System.out.println(gson.toJson(results));
         }
