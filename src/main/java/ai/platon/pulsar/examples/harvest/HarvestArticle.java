@@ -33,7 +33,8 @@ public class HarvestArticle {
         connection.setDoOutput(true);
 
         Gson gson = new GsonBuilder().create();
-        HarvestRequest request = new HarvestRequest(authToken, targetUrl, htmlContent);
+        HarvestRequest request = new HarvestRequest(authToken, targetUrl, htmlContent, true);
+
         try (OutputStream os = connection.getOutputStream()) {
             byte[] input = gson.toJson(request).getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
