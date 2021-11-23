@@ -102,8 +102,8 @@ public class MultiSearcher {
 
     public static void main(String[] args) throws Exception {
         MultiSearcher searcher = new MultiSearcher();
-//        searcher.searchByBrandAndModel();
-//        searcher.searchByKeyword();
+        searcher.searchByBrandAndModel();
+        searcher.searchByKeyword();
         searcher.brandMonitoring();
     }
 }
