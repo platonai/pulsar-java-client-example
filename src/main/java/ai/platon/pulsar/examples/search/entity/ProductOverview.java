@@ -1,5 +1,7 @@
 package ai.platon.pulsar.examples.search.entity;
 
+import java.util.Map;
+
 public class ProductOverview {
     private String href;
     private float price;
@@ -42,5 +44,12 @@ public class ProductOverview {
                 ", price=" + price +
                 ", priceText='" + priceText + '\'' +
                 '}';
+    }
+
+    public static ProductOverview create(Map<String, Object> fields) {
+        return new ProductOverview(
+                fields.getOrDefault("href", "").toString(),
+                Float.parseFloat(fields.getOrDefault("price", "0.0").toString()),
+                fields.getOrDefault("pricetext", "").toString());
     }
 }
