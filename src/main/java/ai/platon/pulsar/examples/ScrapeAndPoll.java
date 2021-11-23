@@ -1,14 +1,15 @@
 package ai.platon.pulsar.examples;
 
-import ai.platon.pulsar.driver.*;
+import ai.platon.pulsar.driver.Driver;
+import ai.platon.pulsar.driver.ScrapeException;
+import ai.platon.pulsar.driver.ScrapeResponse;
 import ai.platon.pulsar.driver.utils.ResourceLoader;
 import ai.platon.pulsar.driver.utils.SQLTemplate;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -18,8 +19,9 @@ import java.util.stream.Collectors;
  * A scrape example to show how to access our services
  * Email to [ivincent.zhang@gmail.com] for your auth token
  * */
-public class Scrape {
-    static String server = "platonic.fun";
+public class ScrapeAndPoll {
+//    static String server = "platonic.fun";
+    static String server = "crawl0";
     // Email to [ivincent.zhang@gmail.com] for the auth token
     static String authToken = "b12yCTcfWnw0dFS767eadcea57a6ce4077348b7b3699578";
 
@@ -44,25 +46,23 @@ public class Scrape {
                     .collect(Collectors.toSet());
 
             Gson gson = driver.createGson();
-            if (!ids.isEmpty()) {
-                Path path = Files.createTempFile("pulsar-", ".txt");
-                Files.write(path, ids);
-                System.out.println("Ids are written to " + path);
 
-                // 1. we may want to check the status of a scrape task with a specified id
-                ScrapeResponse status = driver.findById(ids.iterator().next());
-                System.out.println(gson.toJson(status));
-            } else {
-                System.out.println("No id collected");
+            List<String> finishedIds = new ArrayList<>();
+            List<ScrapeResponse> responses = new ArrayList<>();
+            while (finishedIds.size() < ids.size()) {
+                ids.stream().filter(id -> !finishedIds.contains(id))
+                        .map(driver::findById)
+                        .filter(ScrapeResponse::isDone)
+                        .forEach(response -> {
+                            finishedIds.add(response.getId());
+                            responses.add(response);
+                        });
             }
 
-            // 2. we may want to check our dashboard
-            Dashboard dashboard = driver.dashboard();
-            System.out.println(gson.toJson(dashboard));
-
-            // 3. download all the scrape results
-            Page<CompactedScrapeResponse> results = driver.download(0, 10);
-            System.out.println(gson.toJson(results));
+            responses.forEach(response -> {
+                String json = gson.toJson(response);
+                System.out.println(json);
+            });
         }
     }
 

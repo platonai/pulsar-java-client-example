@@ -1,7 +1,7 @@
 -- noinspection SqlResolveForFile
 -- noinspection SqlNoDataSourceInspectionForFile
 
--- extract review items from review pages, example url: https://www.amazon.com/Electric-Guitar-Stratcaster-Poplar-Linden/product-reviews/B015GM4H8W
+-- extract review items from review pages, example url: https://www.amazon.com/product-reviews/B015GM4H8W
 select
     dom_base_uri(dom) as `url`,
     dom_first_slim_html(dom_owner_body(dom), '.product-title h1 a, a[data-hook=product-link]') as `asin`,
