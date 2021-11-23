@@ -1,3 +1,7 @@
+-- noinspection SqlDialectInspectionForFile
+-- noinspection SqlResolveForFile
+-- noinspection SqlNoDataSourceInspectionForFile
+
 select
        dom_first_text(dom, '.p-name a i') as title,
        dom_first_text(dom, '.p-price') as priceText,

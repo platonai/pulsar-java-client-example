@@ -1,7 +1,7 @@
 package ai.platon.pulsar.examples.search;
 
 import ai.platon.pulsar.examples.search.entity.SearchOrder;
-import ai.platon.pulsar.examples.search.sites.JdSearcher;
+import ai.platon.pulsar.examples.search.sites.JdScraper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 public class JdSearcherTests {
     private String server = "platonic.fun";
     private String authToken = "b07anchor186e206a4d991cdf87d056212b9d40e22";
-    private JdSearcher jdSearcher;
+    private JdScraper jdSearcher;
 
     public JdSearcherTests() throws Exception {
-        jdSearcher = new JdSearcher(server, authToken);
+        jdSearcher = new JdScraper(server, authToken);
     }
 
     @Test

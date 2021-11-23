@@ -1,4 +1,4 @@
-package ai.platon.pulsar.examples.search.search;
+package ai.platon.pulsar.examples.search.scraper;
 
 import ai.platon.pulsar.driver.Driver;
 import ai.platon.pulsar.driver.ScrapeException;
@@ -14,9 +14,9 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ProductSearcher {
+public class GeneralScraper {
 
-    public static Logger logger = LoggerFactory.getLogger(ProductSearcher.class);
+    public static Logger logger = LoggerFactory.getLogger(GeneralScraper.class);
 
     private final String server;
     private final String authToken;
@@ -27,7 +27,7 @@ public class ProductSearcher {
 
     private int errorCode = 0;
 
-    public ProductSearcher(String server, String authToken, Duration httpTimeout) {
+    public GeneralScraper(String server, String authToken, Duration httpTimeout) {
         this.server = server;
         this.authToken = authToken;
         this.httpTimeout = httpTimeout;
@@ -40,23 +40,12 @@ public class ProductSearcher {
         return Duration.ofMillis(pollInterval.toMillis() * pollCount);
     }
 
-    public List<ProductOverview> search(String searchUrl, String searchSQLTemplate) throws InterruptedException {
-        ScrapeResponse response = scrape(searchUrl, searchSQLTemplate);
-        assert response != null;
+    public int getErrorCode() {
+        return errorCode;
+    }
 
-        Gson gson = new GsonBuilder().create();
-        logger.info("Search page result: \n{}", gson.toJson(response));
-
-        List<Map<String, Object>> resultSet = response.getResultSet();
-        if (resultSet == null) {
-            errorCode = 1001;
-            return List.of();
-        }
-
-        return response.getResultSet()
-                .stream()
-                .map(ProductOverview::create)
-                .collect(Collectors.toList());
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
     }
 
     public ScrapeResponse scrape(String url, String sqlTemplate) throws InterruptedException {

@@ -1,11 +1,12 @@
 package ai.platon.pulsar.examples.search.sites;
 
 import ai.platon.pulsar.driver.ScrapeResponse;
-import ai.platon.pulsar.examples.search.search.ProductSearcher;
+import ai.platon.pulsar.examples.search.scraper.ProductScraper;
 import ai.platon.pulsar.examples.search.entity.SearchOrder;
-import ai.platon.pulsar.examples.search.search.SiteSearcher;
+import ai.platon.pulsar.examples.search.scraper.SiteScraper;
 import ai.platon.pulsar.examples.search.entity.ProductDetail;
 import ai.platon.pulsar.examples.search.entity.ProductOverview;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,39 +17,46 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.time.Duration;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class JdSearcher implements SiteSearcher {
+public class JdScraper implements SiteScraper {
 
-    public static Logger logger = LoggerFactory.getLogger(JdSearcher.class);
+    public static Logger logger = LoggerFactory.getLogger(JdScraper.class);
 
     private String searchUrlTemplate = "https://search.jd.com/Search?keyword={{keyword}}&enc=utf-8&wq={{keyword}}";
-    private String searchArgs = "-expires 1d -nJitRetry 3 -ignoreFailure";
-    private String productUrlArgs = "-expires 7d";
+    private String listUrlArgs = "-expires 1d -nJitRetry 3 -ignoreFailure";
+    private String itemUrlArgs = "-expires 7d -scrollCount 20";
     private int searchPageSize = 60;
 
-    private String searchSQLTemplate;
-    private String productSQLTemplate;
+    private String listPageSQLTemplate;
+    private String itemPageSQLTemplate;
     private Duration httpTimeout = Duration.ofMinutes(3);
-    private ProductSearcher searcher;
+    private ProductScraper scraper;
 
-    public JdSearcher(String server, String authToken) throws Exception {
-        URL url = JdSearcher.class.getClassLoader().getResource("sites/jd/x-search.sql");
+    public JdScraper(String server, String authToken) throws Exception {
+        URL url = JdScraper.class.getClassLoader().getResource("sites/jd/x-search.sql");
         assert url != null;
-        searchSQLTemplate = Files.readString(new File(url.toURI()).toPath());
+        listPageSQLTemplate = Files.readAllLines(new File(url.toURI()).toPath())
+                .stream()
+                .filter(line -> !line.startsWith("-- "))
+                .filter(line -> !line.isBlank())
+                .collect(Collectors.joining("\n"));
 
-        url = JdSearcher.class.getClassLoader().getResource("sites/jd/x-item.sql");
+        url = JdScraper.class.getClassLoader().getResource("sites/jd/x-item.sql");
         assert url != null;
-        productSQLTemplate = Files.readString(new File(url.toURI()).toPath());
+        itemPageSQLTemplate = Files.readAllLines(new File(url.toURI()).toPath())
+                .stream()
+                .filter(line -> !line.startsWith("-- "))
+                .filter(line -> !line.isBlank())
+                .collect(Collectors.joining("\n"));
 
-        searcher = new ProductSearcher(server, authToken, httpTimeout);
+        scraper = new ProductScraper(server, authToken, httpTimeout);
     }
 
-    public JdSearcher(String server, String authToken, Duration indexPageExpireTime, Duration itemPageExpireTime) throws Exception {
+    public JdScraper(String server, String authToken, Duration indexPageExpireTime, Duration itemPageExpireTime) throws Exception {
         this(server, authToken);
     }
 
@@ -69,9 +77,35 @@ public class JdSearcher implements SiteSearcher {
             searchUrl = searchUrl;
         }
 
-        searchUrl += " " + searchArgs.trim();
+        searchUrl += " " + listUrlArgs.trim();
 
         return searchUrl;
+    }
+
+    public List<ProductDetail> loadFromCategory(String categoryUrl) throws Exception {
+        List<ProductOverview> productOverviews = scraper.scrapeProductOverviews(categoryUrl, listPageSQLTemplate);
+
+        List<String> productUrls = productOverviews.stream()
+                .map(ProductOverview::getHref)
+                .filter(url -> url.contains("item.jd.com"))
+                .map(url -> StringUtils.substringBefore(url, "?"))
+                .map(url -> url + " " + itemUrlArgs.trim())
+                .collect(Collectors.toList());
+
+        List<ScrapeResponse> responses = scraper.scrapeAll(productUrls, itemPageSQLTemplate);
+        List<ProductDetail> products = responses.stream()
+                .map(ScrapeResponse::getResultSet)
+                .filter(Objects::nonNull)
+                .filter(l -> l.size() > 0)
+                .map(l -> l.get(0))
+                .map(ProductDetail::create)
+                .collect(Collectors.toList());
+
+        List<ProductDetail> unfinishedProducts = products.stream()
+                .filter(p -> Objects.equals(p.getPriceText(), "") || p.getProperties().getOrDefault("good_reviews", "") == "")
+                .collect(Collectors.toList());
+
+        return products;
     }
 
     public List<ProductDetail> search(String keyword, int limit) throws Exception {
@@ -83,7 +117,7 @@ public class JdSearcher implements SiteSearcher {
      * */
     public List<ProductDetail> search(String keyword, SearchOrder order, int limit) throws Exception {
         String searchUrl = createSearchUrl(keyword, order);
-        List<ProductOverview> productOverviews = searcher.search(searchUrl, searchSQLTemplate);
+        List<ProductOverview> productOverviews = scraper.scrapeProductOverviews(searchUrl, listPageSQLTemplate);
 
         if (limit > searchPageSize) {
             // if we want to crawl from other pages
@@ -92,9 +126,9 @@ public class JdSearcher implements SiteSearcher {
         List<String> productUrls = productOverviews.stream()
                 .limit(limit)
                 .map(ProductOverview::getHref)
-                .map(href -> href + " " + productUrlArgs.trim())
+                .map(href -> href + " " + itemUrlArgs.trim())
                 .collect(Collectors.toList());
-        List<ScrapeResponse> responses = searcher.scrapeAll(productUrls, productSQLTemplate);
+        List<ScrapeResponse> responses = scraper.scrapeAll(productUrls, itemPageSQLTemplate);
         List<ProductDetail> products = responses.stream()
                 .map(ScrapeResponse::getResultSet)
                 .filter(Objects::nonNull)
