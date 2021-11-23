@@ -6,7 +6,6 @@ import ai.platon.pulsar.examples.search.sites.JdSearcher;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

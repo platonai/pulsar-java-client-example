@@ -96,11 +96,18 @@
     </build>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>ai.platon.pulsar</groupId>-->
+<!--            <artifactId>pulsar-kotlin-driver</artifactId>-->
+<!--            <version>1.6.12-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>ai.platon.pulsar</groupId>
             <artifactId>pulsar-kotlin-driver</artifactId>
-            <version>1.6.12-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib3/pulsar-kotlin-driver-1.6.12.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
