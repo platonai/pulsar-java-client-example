@@ -87,6 +87,8 @@ public class MultiSearcher {
 
     /**
      * 品牌巡检
+     *
+     * 备注：大多数平台不提供销售量数据
      * */
     public void brandMonitoring() throws Exception {
         String keyword = "御林铁卫";
